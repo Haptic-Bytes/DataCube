@@ -105,5 +105,5 @@ function main() {
     data;
 
     //rcube = CSG.cube({ center: [0,,0], radius: [rsize-1, rsize-1, rsize-1] }); return rcube.union(frame());
-    return frame().union([struts(), bits(data)]);
+    return frame().union([struts(), bits(data).setColor([0,0.5,0])]);
 }
