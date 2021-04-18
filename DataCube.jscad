@@ -1,22 +1,17 @@
-var size = 100;
-var ft = 5;
-var st = 1.2;
-var n_cols = 5;
-var bit_h = 12;
-var bit_w = 8;
-var gen_support = true; 
-var sw = 0.4;
+function getParameterDefinitions() {
+    return [
+        { name: 'size', caption: 'The lenght of one side of the cube:', type: 'int', default: 100 },
+        { name: 'ft', caption: 'The thickness of the outer frame:', type: 'int', default: 5 },
+        { name: 'st', caption: 'The thickness of the struts inside the cube:', type: 'float', default: 1.2 },
+        { name: 'n_cols', caption: 'The number of columns/rows/levels of the cube:', type: 'int', default: 5},
+        { name: 'bit_h', caption: 'The height of one "bit":', type: 'int', default: 12},
+        { name: 'bit_w', caption: 'The width of one "bit":', type: 'int', default: 8},
+        { name: 'gen_support', caption: 'Generate supports?', type: 'choice', values: ["No", "Yes"], default: "Yes", captions: ['No', 'Yes']}, 
+        { name: 'sw', caption: 'The thickness of the supports:', type: 'float', default: 0.4}
+    ];
+}
 
-var rsize = size/2;
-var rft = ft/2;
-var rst = st/2;
-
-var us = size - 2*ft;
-var rus = us / 2;
-var sep = us / (n_cols+1);
-
-
-function frame() {
+function frame(rsize, rft) {
     var far = [
         // bottom square
         CSG.cube({ center: [0,-(rsize-rft),-rsize+rft], radius: [rsize, rft, rft]}),
@@ -41,7 +36,7 @@ function frame() {
     return fr.union(far).setColor([0,0.263,0.412]);
 }
 
-function struts() {
+function struts(rsize, ft, sep, rst, n_cols) {
     var sar = [];
     
     // top and bottom struts
@@ -72,7 +67,7 @@ function struts() {
     return st.union(sar).setColor([0,0.263,0.412]);
 }
 
-function bits(data) {
+function bits(data, rsize, ft, sep, n_cols, bit_h, bit_w) {
     var bar = [];
 
     var bit = CSG.polyhedron({
@@ -104,7 +99,7 @@ function bits(data) {
     return bi.union(bar).setColor([0.004, 0.58, 0.604]);
 }
 
-function support() {
+function support(rft, sw, size, rsize, ft, sep, n_cols) {
     
     var sup = CAG.fromPoints([[-rft,-rft],[rft,rft],[rft,rft+sw],[-rft,-rft+sw]])
         .extrude({offset: [0,0,size-2*ft]})
@@ -113,30 +108,31 @@ function support() {
     var supar = [];
     var i;
     for (i=0; i<n_cols; i++) {
-        supar.push(sup.translate([-rsize+rft,-rsize+i*sep+sep+rft,0]));
-        supar.push(sup.translate([rsize-rft,-rsize+i*sep+sep+rft,0]));
-        supar.push(sup.rotateZ(90).translate([-rsize+i*sep+sep+rft,-rsize+rft,0]));
-        supar.push(sup.rotateZ(90).translate([-rsize+i*sep+sep+rft,rsize-rft,0]));
+        supar.push(sup.translate([-rsize+rft, -rsize+i*sep+sep+ft-sw*0.5, 0]));
+        supar.push(sup.translate([rsize-rft, -rsize+i*sep+sep+ft-sw*0.5, 0]));
+        supar.push(sup.rotateZ(90).translate([-rsize+i*sep+sep+ft-sw*0.5, -rsize+rft, 0]));
+        supar.push(sup.rotateZ(90).translate([-rsize+i*sep+sep+ft-sw*0.5, rsize-rft, 0]));
     }
     
     sups = supar.pop();
     return sups.union(supar).setColor([0.859,0.122,0.282]);
 }
 
-function main() {
+function main(params) {
+    
+    var us = params.size - 2 * params.ft;
+    var sep = us / (params.n_cols+1);
     
     var data = [];
     var i;
-    for (i=0; i<(n_cols*n_cols*n_cols); i++) {
+    for (i=0; i<(params.n_cols*params.n_cols*params.n_cols); i++) {
         data.push(Math.round(Math.random()));
     }
 
-    //rcube = CSG.cube({ center: [0,0,0], radius: [rsize-1, rsize-1, rsize-1] }); return rcube.union(frame());
-
-    DataCube = frame().union(struts());
-    DataCube = DataCube.union(bits(data));
-    if (gen_support) {
-       DataCube = DataCube.union(support());
+    DataCube = frame(params.size/2, params.ft/2).union(struts(params.size/2, params.ft, sep, params.st/2, params.n_cols));
+    DataCube = DataCube.union(bits(data, params.size/2, params.ft, sep, params.n_cols, params.bit_h, params.bit_w));
+    if (params.gen_support == "Yes") {
+       DataCube = DataCube.union(support(params.ft/2, params.sw, params.size, params.size/2, params.ft, sep, params.n_cols));
     }
     return DataCube;
 }
