@@ -4,6 +4,8 @@ var st = 1.2;
 var n_cols = 5;
 var bit_h = 12;
 var bit_w = 8;
+var gen_support = true; 
+var sw = 0.4;
 
 var rsize = size/2;
 var rft = ft/2;
@@ -36,7 +38,7 @@ function frame() {
     ];
 
     fr = far.pop();
-    return fr.union(far);
+    return fr.union(far).setColor([0,0.263,0.412]);
 }
 
 function struts() {
@@ -59,8 +61,15 @@ function struts() {
         }
     }
 
+    // even more struts
+    for (i=0; i<n_cols; i++) {
+        for (j=0; j<n_cols; j++) {
+            sar.push(CSG.cube({ center: [-rsize+ft+i*sep+sep,0,-rsize+ft+j*sep+sep], radius: [rst, rsize-sep-ft, rst] }));
+        }
+    }
+
     st = sar.pop();
-    return st.union(sar);
+    return st.union(sar).setColor([0,0.263,0.412]);
 }
 
 function bits(data) {
@@ -92,7 +101,26 @@ function bits(data) {
     }
     
     bi = bar.pop();
-    return bi.union(bar);
+    return bi.union(bar).setColor([0.004, 0.58, 0.604]);
+}
+
+function support() {
+    
+    var sup = CAG.fromPoints([[-rft,-rft],[rft,rft],[rft,rft+sw],[-rft,-rft+sw]])
+        .extrude({offset: [0,0,size-2*ft]})
+        .translate([0,0,-rsize+ft]);
+
+    var supar = [];
+    var i;
+    for (i=0; i<n_cols; i++) {
+        supar.push(sup.translate([-rsize+rft,-rsize+i*sep+sep+rft,0]));
+        supar.push(sup.translate([rsize-rft,-rsize+i*sep+sep+rft,0]));
+        supar.push(sup.rotateZ(90).translate([-rsize+i*sep+sep+rft,-rsize+rft,0]));
+        supar.push(sup.rotateZ(90).translate([-rsize+i*sep+sep+rft,rsize-rft,0]));
+    }
+    
+    sups = supar.pop();
+    return sups.union(supar).setColor([0.859,0.122,0.282]);
 }
 
 function main() {
@@ -102,8 +130,13 @@ function main() {
     for (i=0; i<(n_cols*n_cols*n_cols); i++) {
         data.push(Math.round(Math.random()));
     }
-    data;
 
-    //rcube = CSG.cube({ center: [0,,0], radius: [rsize-1, rsize-1, rsize-1] }); return rcube.union(frame());
-    return frame().union([struts(), bits(data).setColor([0,0.5,0])]);
+    //rcube = CSG.cube({ center: [0,0,0], radius: [rsize-1, rsize-1, rsize-1] }); return rcube.union(frame());
+
+    DataCube = frame().union(struts());
+    DataCube = DataCube.union(bits(data));
+    if (gen_support) {
+       DataCube = DataCube.union(support());
+    }
+    return DataCube;
 }
