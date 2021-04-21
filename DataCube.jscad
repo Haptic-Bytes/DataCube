@@ -1,3 +1,5 @@
+// vim: set syntax=javascript:
+
 function getParameterDefinitions() {
     return [
         { name: 'size', caption: 'The lenght of one side of the cube:', type: 'int', default: 100 },
