@@ -2,14 +2,14 @@
 
 function getParameterDefinitions() {
     return [
-        { name: 'size', caption: 'The lenght of one side of the cube:', type: 'int', default: 100 },
-        { name: 'ft', caption: 'The thickness of the outer frame:', type: 'int', default: 5 },
-        { name: 'st', caption: 'The thickness of the struts inside the cube:', type: 'float', default: 1.2 },
-        { name: 'n_cols', caption: 'The number of columns/rows/levels of the cube:', type: 'int', default: 5},
-        { name: 'bit_h', caption: 'The height of one "bit":', type: 'int', default: 12},
-        { name: 'bit_w', caption: 'The width of one "bit":', type: 'int', default: 8},
+        { name: 'size', caption: 'Length of one side of the cube:', type: 'int', default: 100 },
+        { name: 'ft', caption: 'Thickness of the outer frame:', type: 'int', default: 5 },
+        { name: 'st', caption: 'Thickness of the struts inside the cube:', type: 'float', default: 1.2 },
+        { name: 'n_cols', caption: 'Number of columns/rows/levels of the cube:', type: 'int', default: 5},
+        { name: 'bit_h', caption: 'Height of one "bit":', type: 'int', default: 12},
+        { name: 'bit_w', caption: 'Width of one "bit":', type: 'int', default: 8},
         { name: 'gen_support', caption: 'Generate supports?', type: 'choice', values: ["No", "Yes"], default: "Yes", captions: ['No', 'Yes']}, 
-        { name: 'sw', caption: 'The thickness of the supports:', type: 'float', default: 0.4}
+        { name: 'sw', caption: 'Thickness of the supports:', type: 'float', default: 0.4}
     ];
 }
 
