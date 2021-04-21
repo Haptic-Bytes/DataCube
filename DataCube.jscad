@@ -62,6 +62,7 @@ function struts(rsize, ft, sep, rst, n_cols) {
     for (i=0; i<n_cols; i++) {
         for (j=0; j<n_cols; j++) {
             sar.push(CSG.cube({ center: [-rsize+ft+i*sep+sep,0,-rsize+ft+j*sep+sep], radius: [rst, rsize-sep-ft, rst] }));
+            sar.push(CSG.cube({ center: [0, -rsize+ft+i*sep+sep, -rsize+ft+j*sep+sep], radius: [rsize-sep-ft, rst, rst] }));
         }
     }
 
