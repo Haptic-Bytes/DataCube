@@ -59,11 +59,11 @@ function struts(rsize, ft, sep, rst, n_cols) {
         }
     }
 
-    // even more struts
+    // more horizontal struts
     for (i=0; i<n_cols; i++) {
-        for (j=0; j<n_cols; j++) {
-            sar.push(CSG.cube({ center: [-rsize+ft+i*sep+sep,0,-rsize+ft+j*sep+sep], radius: [rst, rsize-sep-ft, rst] }));
-            sar.push(CSG.cube({ center: [0, -rsize+ft+i*sep+sep, -rsize+ft+j*sep+sep], radius: [rsize-sep-ft, rst, rst] }));
+        for (j=0; j<n_cols+1; j++) {
+            sar.push(CSG.cube({ center: [-rsize+ft+i*sep+sep,0,-rsize+ft+j*sep+0.5*sep], radius: [rst, rsize-sep-ft, rst] }));
+            sar.push(CSG.cube({ center: [0, -rsize+ft+i*sep+sep, -rsize+ft+j*sep+0.5*sep], radius: [rsize-sep-ft, rst, rst] }));
         }
     }
 
