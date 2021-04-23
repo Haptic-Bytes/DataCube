@@ -2,7 +2,7 @@
 
 function getParameterDefinitions() {
     return [
-        { name: 'gen_support', caption: 'Generate supports?', type: 'choice', values: ["No", "Yes"], default: "Yes", captions: ['No', 'Yes']}, 
+        { name: 'gen_support', caption: 'Generate supports?', type: 'choice', values: ["No", "Yes"], default: "No", captions: ['No', 'Yes']}, 
         { name: 'sw', caption: 'Thickness of the supports:', type: 'float', default: 0.4},
         { name: 'size', caption: 'Length of one side of the cube:', type: 'int', default: 100 },
         { name: 'ft', caption: 'Thickness of the outer frame:', type: 'int', default: 5 },
