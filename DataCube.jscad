@@ -108,14 +108,25 @@ function support(rft, sw, size, rsize, ft, sep, n_cols) {
     var sup = CAG.fromPoints([[-rft,-rft],[rft,rft],[rft,rft+sw],[-rft,-rft+sw]])
         .extrude({offset: [0,0,size-2*ft]})
         .translate([0,0,-rsize+ft]);
+    
+    var hsup = CAG.fromPoints([[ft-rft-rsize+sep, rft], [rft+rsize-2*ft-sep, rft], [-ft+rft+rsize-sep, -rft], [rft-rsize+ft+sep, -rft]])
+        .extrude({offset: [0,0,sw]})
+        .translate([-0.5*sw,0,0]);
+        
 
     var supar = [];
     var i;
+    // vertical supports
     for (i=0; i<n_cols; i++) {
         supar.push(sup.translate([-rsize+rft, -rsize+i*sep+sep+ft-sw*0.5, 0]));
         supar.push(sup.translate([rsize-rft, -rsize+i*sep+sep+ft-sw*0.5, 0]));
         supar.push(sup.rotateZ(90).translate([-rsize+i*sep+sep+ft-sw*0.5, -rsize+rft, 0]));
         supar.push(sup.rotateZ(90).translate([-rsize+i*sep+sep+ft-sw*0.5, rsize-rft, 0]));
+    }
+
+    // horizontal supports
+    for (i=0; i<n_cols; i++) {
+        supar.push(hsup.translate([0,-rsize+rft,0]));
     }
     
     sups = supar.pop();
