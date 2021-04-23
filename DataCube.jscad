@@ -126,7 +126,10 @@ function support(rft, sw, size, rsize, ft, sep, n_cols) {
 
     // horizontal supports
     for (i=0; i<n_cols; i++) {
-        supar.push(hsup.translate([0,-rsize+rft,0]));
+        supar.push(hsup.translate([0,-rsize+rft,-rsize+ft+sep+i*sep]));
+        supar.push(hsup.translate([0,+rsize-rft,-rsize+ft+sep+i*sep]));
+        supar.push(hsup.rotateZ(90).translate([-rsize+rft, 0, -rsize+ft+sep+i*sep]));
+        supar.push(hsup.rotateZ(90).translate([rsize-rft, 0, -rsize+ft+sep+i*sep]));
     }
     
     sups = supar.pop();
