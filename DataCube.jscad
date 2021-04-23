@@ -139,10 +139,13 @@ function main(params) {
     var sep = us / (params.n_cols+1);
     
     var data = [];
+    var numOfCubeBits = params.n_cols*params.n_cols*params.n_cols;
     var i;
-    for (i=0; i<(params.n_cols*params.n_cols*params.n_cols); i++) {
+    for (i=0; i < numOfCubeBits; i++) {
         data.push(Math.round(Math.random()));
     }
+    // the following line can be replaced to overwrite data if a DataCube with custom data should be generated
+    /* REPLACEME */
 
     DataCube = frame(params.size/2, params.ft/2, params.fr_offset).union(struts(params.size/2, params.ft, sep, params.st/2, params.n_cols));
     DataCube = DataCube.union(bits(data, params.size/2, params.ft, sep, params.n_cols, params.bit_h, params.bit_w));
