@@ -23,6 +23,8 @@ For some of these settings, the _advanced_ or even _expert_ settings mode needs 
 
 ### Cura (for FDM printers) 
 
+We recommend to use PrusaSlicer rather than Cura, because it seems to handle the bridges a bit better. But Cura should be mostly fine as well. 
+
 | Setting | Value | Description | 
 | --- | --- | --- | 
 | Supports | None | see description for PrusaSlicer | 
