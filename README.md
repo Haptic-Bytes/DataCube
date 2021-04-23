@@ -12,7 +12,7 @@ For FDM prints, we recommend PLA, as it works great for bridging (horizontal par
 For some of these settings, the _advanced_ or even _expert_ settings mode needs to be selected in PrusaSlicer. 
 
 | Setting | Value | Description  |
-| --:     | : --  | :--  |
+| --- | ---  | --- |
 | Supports | None | We recommend using the supports that can be optionally generated directly with the model as this will save you some material. Using automatic or manual supports by the slicer should work, too; but it might be difficult to remove.  |
 | Layer height (Print Settings -> Layers and perimeters) | 0.3 | This has been tested with both 0.2 and 0.3 layer height, which worked great.|
 | Detect thin walls (Print Settings -> Layers and perimeters) | Yes | This is important for the generated supports to work.  |
