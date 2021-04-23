@@ -20,3 +20,15 @@ For some of these settings, the _advanced_ or even _expert_ settings mode needs 
 | Brim | As you like | A brim wasn't required in our tests. But it will help if you are having difficulties keeping the print stuck to the print bed.  |
 | Avoid crossing perimeters (Print Settings -> Layers and perimeters) | Optional | Sometimes it happens that the print head movement breaks one of the thin struts while it travels to a different position. This setting should prevent that. However, enabling this can increase the time for G-code generation __a lot__, especially in older versions of Prusa Slicer. Alternatively, you can also enable _Lift Z_, which also prevents the issue. | 
 | Lift Z (Printer Settings -> Extruder) | Optional | Helps to avoid breaking thin struts like the previous setting.  |
+
+### Cura (for FDM printers) 
+
+| Setting | Value | Description | 
+| --- | --- | --- | 
+| Supports | None | see description for PrusaSlicer | 
+| Layer height | 0.3 | see description for PrusaSlicer | 
+| Infill | 0% | No infill should be fine. | 
+| Brim | As you like | Should work without. Use if the model doesn't stick to the print bed very well. |
+| Print Thin Walls | Yes | Important if the supports that come with the model are used as they otherwise don't print. |
+| Enable Retraction | Yes | This goes together with the z hop setting. | 
+| Z Hop When Retracted | Yes | To avoid breaking the thin struts as the print head travels. | 
