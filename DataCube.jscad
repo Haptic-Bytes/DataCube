@@ -74,8 +74,8 @@ function bits(data, rsize, ft, sep, n_cols, bit_h, bit_w) {
         points: [ [0,0,bit_h/2], [0,0,-bit_h/2], // top/bottom points
                   [-bit_w/2,-bit_w/2,0], [-bit_w/2,bit_w/2,0], [bit_w/2,bit_w/2], [bit_w/2,-bit_w/2] // other points
                 ],
-        faces:  [ [0,5,2], [0,2,3], [0,3,4], [0,4,5],
-                  [1,2,5], [1,3,2], [1,4,3], [1,5,4]
+        faces:  [ [0,5,2], [0,2,3], [0,3,4], [0,4,5], // top half
+                  [1,2,5], [1,3,2], [1,4,3], [1,5,4]  // bottom half
                 ]
     });
 
