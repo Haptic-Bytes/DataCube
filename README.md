@@ -14,7 +14,7 @@ For some of these settings, the _advanced_ or even _expert_ settings mode needs 
 | Setting | Value | Description  |
 | --- | ---  | --- |
 | Supports | None | We recommend using the supports that can be optionally generated directly with the model as this will save you some material. Using automatic or manual supports by the slicer should work, too; but it might be difficult to remove.  |
-| Layer height (Print Settings -> Layers and perimeters) | 0.3 | This has been tested with both 0.2 and 0.3 layer height, which worked great.|
+| Layer height (Print Settings -> Layers and perimeters) | 0.3mm | This has been tested with both 0.2 and 0.3 layer height, which worked great.|
 | Detect thin walls (Print Settings -> Layers and perimeters) | Yes | This is important for the generated supports to work.  |
 | Infill | 0% | The model doesn't really need infill.  |
 | Brim | As you like | A brim wasn't required in our tests. But it will help if you are having difficulties keeping the print stuck to the print bed.  |
@@ -26,7 +26,7 @@ For some of these settings, the _advanced_ or even _expert_ settings mode needs 
 | Setting | Value | Description | 
 | --- | --- | --- | 
 | Supports | None | see description for PrusaSlicer | 
-| Layer height | 0.3 | see description for PrusaSlicer | 
+| Layer height | 0.3mm | see description for PrusaSlicer | 
 | Infill | 0% | No infill should be fine. | 
 | Brim | As you like | Should work without. Use if the model doesn't stick to the print bed very well. |
 | Print Thin Walls | Yes | Important if the supports that come with the model are used as they otherwise don't print. |
