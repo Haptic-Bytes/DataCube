@@ -2,18 +2,19 @@
 
 function getParameterDefinitions() {
     return [
+        { name: 'gen_support', caption: 'Generate supports?', type: 'choice', values: ["No", "Yes"], default: "Yes", captions: ['No', 'Yes']}, 
+        { name: 'sw', caption: 'Thickness of the supports:', type: 'float', default: 0.4},
         { name: 'size', caption: 'Length of one side of the cube:', type: 'int', default: 100 },
         { name: 'ft', caption: 'Thickness of the outer frame:', type: 'int', default: 5 },
         { name: 'st', caption: 'Thickness of the struts inside the cube:', type: 'float', default: 1.2 },
         { name: 'n_cols', caption: 'Number of columns/rows/levels of the cube:', type: 'int', default: 5},
         { name: 'bit_h', caption: 'Height of one "bit":', type: 'int', default: 12},
         { name: 'bit_w', caption: 'Width of one "bit":', type: 'int', default: 8},
-        { name: 'gen_support', caption: 'Generate supports?', type: 'choice', values: ["No", "Yes"], default: "Yes", captions: ['No', 'Yes']}, 
-        { name: 'sw', caption: 'Thickness of the supports:', type: 'float', default: 0.4}
+        { name: 'fr_offset', caption: 'Height offset (for better bridges):', type: 'float', default: 0.2 }
     ];
 }
 
-function frame(rsize, rft) {
+function frame(rsize, rft, fr_offset) {
     var far = [
         // bottom square
         CSG.cube({ center: [0,-(rsize-rft),-rsize+rft], radius: [rsize, rft, rft]}),
@@ -22,8 +23,8 @@ function frame(rsize, rft) {
         CSG.cube({ center: [rsize-rft,0,-rsize+rft], radius: [rft, rsize, rft]}),
 
         // top square
-        CSG.cube({ center: [0,-(rsize-rft),rsize-rft], radius: [rsize, rft, rft]}),
-        CSG.cube({ center: [0,rsize-rft,rsize-rft], radius: [rsize, rft, rft]}),
+        CSG.cube({ center: [0,-(rsize-rft),rsize-rft-fr_offset], radius: [rsize, rft, rft+fr_offset]}),
+        CSG.cube({ center: [0,rsize-rft,rsize-rft-fr_offset], radius: [rsize, rft, rft+fr_offset]}),
         CSG.cube({ center: [-(rsize-rft),0,rsize-rft], radius: [rft, rsize, rft]}),
         CSG.cube({ center: [rsize-rft,0,rsize-rft], radius: [rft, rsize, rft]}),
 
@@ -132,7 +133,7 @@ function main(params) {
         data.push(Math.round(Math.random()));
     }
 
-    DataCube = frame(params.size/2, params.ft/2).union(struts(params.size/2, params.ft, sep, params.st/2, params.n_cols));
+    DataCube = frame(params.size/2, params.ft/2, params.fr_offset).union(struts(params.size/2, params.ft, sep, params.st/2, params.n_cols));
     DataCube = DataCube.union(bits(data, params.size/2, params.ft, sep, params.n_cols, params.bit_h, params.bit_w));
     if (params.gen_support == "Yes") {
        DataCube = DataCube.union(support(params.ft/2, params.sw, params.size, params.size/2, params.ft, sep, params.n_cols));
