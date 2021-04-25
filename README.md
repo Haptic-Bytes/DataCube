@@ -18,8 +18,8 @@ For some of these settings, the _advanced_ or even _expert_ settings mode needs 
 | Detect thin walls (Print Settings -> Layers and perimeters) | Yes | This is important for the generated supports to work.  |
 | Infill | 0% | The model doesn't really need infill.  |
 | Brim | As you like | A brim wasn't required in our tests. But it will help if you are having difficulties keeping the print stuck to the print bed.  |
-| Avoid crossing perimeters (Print Settings -> Layers and perimeters) | Optional | Sometimes it happens that the print head movement breaks one of the thin struts while it travels to a different position. This setting should prevent that. However, enabling this can increase the time for G-code generation __a lot__, especially in older versions of Prusa Slicer. Alternatively, you can also enable _Lift Z_, which also prevents the issue. | 
-| Lift Z (Printer Settings -> Extruder) | Optional | Helps to avoid breaking thin struts like the previous setting.  |
+| Avoid crossing perimeters (Print Settings -> Layers and perimeters) | Optional | However, enabling this can increase the time for G-code generation __a lot__, especially in older versions of Prusa Slicer. Alternatively, you can also enable _Lift Z_, which also prevents the issue. | 
+| Lift Z (Printer Settings -> Extruder) | Optional | Sometimes it happens that the print head movement breaks one of the thin struts while it travels to a different position. This setting should prevent that. |
 
 ### Cura (for FDM printers) 
 
